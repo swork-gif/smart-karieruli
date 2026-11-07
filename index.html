@@ -867,7 +867,7 @@ details > summary{font-weight:500}
 
     <section class="t sun w4 cta">
       <h3>მზად ხარ? დარეგისტრირდი და მონიშნე პირველი შეხვედრის დღე.</h3>
-      <a href="https://smartsupport.ge/" target="_blank" rel="noopener">დარეგისტრირდი</a>
+      <a href="https://swork-gif.github.io/smart-karieruli/forma/" target="_blank" rel="noopener">დარეგისტრირდი</a>
     </section>
 
   </div>
@@ -993,7 +993,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
   function listHtml(LIST){var h='';
     if(!LIST.length)return '<p style="font-size:13.5px">ახლა შესაფერისი ღია ვაკანსია არ არის. მონიშნე მეტი უნარი.</p>';
     h+=salNote(LIST)+'<ul class="vlist">'+LIST.slice(0,3).map(function(v){var u=url(v[6]);return '<li><b>'+esc(MD.tt[v[2]])+'</b><span>'+esc(MD.co[v[3]])+(MD.ci[v[4]]?' · '+esc(MD.ci[v[4]]):'')+(v[5]?' · ვადა '+dl(v[5]):'')+(v[7]?' · <b class="vsal">'+sal(v)+'</b>':'')+'</span>'+(u?'<a href="'+u+'" target="_blank" rel="noopener">ვაკანსიის ნახვა</a>':'')+'</li>'}).join('')+'</ul>';
-    if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="https://smartsupport.ge/" target="_blank" rel="noopener">გახსენი სრული სია · 29 ₾</a></div></div>';
+    if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="https://swork-gif.github.io/smart-karieruli/forma/?s=vac" target="_blank" rel="noopener">გახსენი სრული სია · 29 ₾</a></div></div>';
     return h}
   var CB='https://smartacademy.ge/trainings/',UT='?utm_source=career&utm_medium=matcher',PROMO='';
   var CRS={xls:['MS Excel: საბაზისოდან მონაცემთა ანალიზამდე','342-MICROSOFT-EXCEL'],xla:['MS Excel მონაცემთა ანალიზისთვის','331-MS-Excel-%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%AA%E1%83%94%E1%83%9B%E1%83%97%E1%83%90-%E1%83%90%E1%83%9C%E1%83%90%E1%83%9A%E1%83%98%E1%83%96%E1%83%98%E1%83%A1%E1%83%97%E1%83%95%E1%83%98%E1%83%A1'],
@@ -1042,7 +1042,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
       if(!LIST.length)h+='<p style="font-size:13.5px">ახლა შესაფერისი ღია ვაკანსია არ არის. მონიშნე მეტი უნარი ან სხვა პოზიცია.</p>';
       else{
         h+=salNote(LIST)+'<ul class="vlist">'+LIST.slice(0,3).map(function(v){var u=url(v[6]);return '<li><b>'+esc(MD.tt[v[2]])+'</b><span>'+esc(MD.co[v[3]])+(MD.ci[v[4]]?' · '+esc(MD.ci[v[4]]):'')+(v[5]?' · ვადა '+dl(v[5]):'')+(v[7]?' · <b class="vsal">'+sal(v)+'</b>':'')+'</span>'+(u?'<a href="'+u+'" target="_blank" rel="noopener">ვაკანსიის ნახვა</a>':'')+'</li>'}).join('')+'</ul>';
-        if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="https://smartsupport.ge/" target="_blank" rel="noopener">გახსენი სრული სია · 29 ₾</a></div></div>';
+        if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="https://swork-gif.github.io/smart-karieruli/forma/?s=vac" target="_blank" rel="noopener">გახსენი სრული სია · 29 ₾</a></div></div>';
       }
     }
     h+='</div>';
@@ -1142,12 +1142,12 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
 
 
 </script>
-
 <script>
 /* SMART: iframe-ის სიმაღლის ავტომატური მორგება */
 (function(){if(window.parent===window)return;var last=0;
-function send(){var h=Math.ceil(document.documentElement.scrollHeight);if(Math.abs(h-last)>2){last=h;window.parent.postMessage({kh:h},'*')}}
+function send(){var b=document.body,cs=getComputedStyle(b),h=Math.ceil(b.getBoundingClientRect().height+parseFloat(cs.marginTop)+parseFloat(cs.marginBottom));if(Math.abs(h-last)>2){last=h;window.parent.postMessage({kh:h},'*')}}
 window.addEventListener('message',function(e){if(e.data&&e.data.khAck){document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden'}});
 window.addEventListener('load',send);window.addEventListener('resize',send);
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="smart-karieruli/forma"]');if(a)a.target='_self'},true);
 if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);setInterval(send,1500);send()})();
 </script>

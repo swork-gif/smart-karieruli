@@ -1147,6 +1147,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
 /* SMART: iframe-ის სიმაღლის ავტომატური მორგება */
 (function(){if(window.parent===window)return;var last=0;
 function send(){var h=Math.ceil(document.documentElement.scrollHeight);if(Math.abs(h-last)>2){last=h;window.parent.postMessage({kh:h},'*')}}
+window.addEventListener('message',function(e){if(e.data&&e.data.khAck){document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden'}});
 window.addEventListener('load',send);window.addEventListener('resize',send);
 if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);setInterval(send,1500);send()})();
 </script>

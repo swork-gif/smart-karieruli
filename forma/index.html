@@ -120,6 +120,7 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
         <h2><span class="st">3</span>რა სამსახურს ეძებ</h2>
         <label class="f">სასურველი პოზიცია<input type="text" id="pos" placeholder="მაგ.: გაყიდვების მენეჯერი"></label>
         <div class="f" style="display:grid;gap:8px"><b style="font-size:13.5px">შენი დონე</b><div class="chips" id="lvl"></div></div>
+        <label class="f">სახელფასო მოლოდინი <small>თვეში, ხელზე</small><input type="text" id="sal" inputmode="numeric" maxlength="40" placeholder="მაგ.: 1500 ₾ ან 1200–1500 ₾"></label>
         <div class="row">
           <label class="f" id="w-cv">CV <small>მხოლოდ PDF, 5 მბ-მდე</small>
             <span class="drop" id="drop" tabindex="0"><b id="dropT">ატვირთე CV</b><span class="hint">დააჭირე ან ჩააგდე ფაილი</span></span>
@@ -251,7 +252,7 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
     function fail(t){btn.disabled=false;btn.textContent='გადახდაზე გადასვლა';er.textContent=t||'გაგზავნა ვერ მოხერხდა. შეამოწმე ინტერნეტი და სცადე თავიდან.';er.hidden=false}
     function send(cv){var d=st.day!=null&&s.meet?D[st.day]:null;
       var body={hp:$('hp').value,name:$('name').value.trim(),tel:$('tel').value.trim(),mail:$('mail').value.trim(),spec:$('spec').value.trim(),
-        svc:s.t,stu:$('stu').checked,pos:$('pos').value.trim(),lvl:LV[st.lvl],li:$('li').value.trim(),
+        svc:s.t,stu:$('stu').checked,pos:$('pos').value.trim(),lvl:LV[st.lvl],li:$('li').value.trim(),sal:$('sal').value.trim(),
         day:d?(d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)):'',pace:s.id==='full'?PACE[st.pace][0]:'',
         cmt:$('cmt').value.trim(),ok:$('ok').checked,cv:cv};
       fetch(ENDPOINT,{method:'POST',body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(j){

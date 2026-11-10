@@ -256,8 +256,8 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
         day:d?(d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)):'',pace:s.id==='full'?PACE[st.pace][0]:'',
         cmt:$('cmt').value.trim(),ok:$('ok').checked,cv:cv};
       fetch(ENDPOINT,{method:'POST',body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(j){
-        if(j&&j.ok){showDone()}else{fail(j&&j.err==='cv_type'?'CV უნდა იყოს PDF ფაილი.':j&&j.err==='cv_size'?'CV 5 მბ-ზე დიდია.':null)}
-      }).catch(function(){fail()})}
+        if(j&&j.ok){showDone()}else{fail(j&&j.err==='cv_type'?'CV უნდა იყოს PDF ფაილი.':j&&j.err==='cv_size'?'CV 5 მბ-ზე დიდია.':j&&j.err==='fields'?'შეამოწმე სახელი, ტელეფონი (მინ. 9 ციფრი) და ელ-ფოსტა.':'გაგზავნა ვერ მოხერხდა. სცადე თავიდან. (კოდი: '+((j&&j.err)||'?')+')')}
+      }).catch(function(){fail('გაგზავნა ვერ მოხერხდა. შეამოწმე ინტერნეტი და სცადე თავიდან. (კოდი: net)')})}
     if(st.fobj){var rd=new FileReader();rd.onload=function(){send({name:st.file,data:String(rd.result).split(',')[1]})};rd.onerror=function(){fail('CV-ის წაკითხვა ვერ მოხერხდა. სცადე თავიდან.')};rd.readAsDataURL(st.fobj)}
     else send(null)});
   $('again').addEventListener('click',function(){$('done').hidden=true;$('main').hidden=false});

@@ -240,7 +240,8 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
     function showDone(){$('main').hidden=true;$('done').hidden=false;
       $('dTitle').textContent=s.t+' · '+price(s.p)+' ₾';
       if(ENDPOINT&&!PAYLINK){
-        $('dText').textContent='რეგისტრაცია მიღებულია. ონლაინ გადახდა მალე ჩაირთვება: ჩვენი გუნდი 1 სამუშაო დღეში დაგიკავშირდება '+$('mail').value.trim()+' მისამართზე ან ტელეფონით, გადახდისა და პირველი შეხვედრის დასაზუსტებლად.';
+        var md=st.day!=null&&s.meet?D[st.day]:null;
+        $('dText').textContent='რეგისტრაცია მიღებულია.'+(md?' შენი შეხვედრა: '+md.getDate()+' '+MN[md.getMonth()]+'.':'')+' ონლაინ გადახდა მალე ჩაირთვება და ბმულს ელ-ფოსტაზე მიიღებ: '+$('mail').value.trim()+'.';
         $('pay').hidden=true;$('payHint').hidden=true;$('again').hidden=true;
       }else{
         $('dText').textContent='ბოლო ნაბიჯი: გადახდა ბარათით. გადახდის შემდეგ '+$('mail').value.trim()+' მისამართზე მიიღებ ბანკის ქვითარს'+(s.meet?' და კალენდრის მოსაწვევს.':'.');$('pay').textContent='გადახდა · '+price(s.p)+' ₾';

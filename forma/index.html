@@ -86,6 +86,42 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
 @media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}aside{position:static}}
 @media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}.card{padding:18px}.days{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* compact pass */
+.page{gap:14px;padding-block:16px 28px}
+form{gap:12px}
+.card{padding:18px 20px;gap:12px;border-radius:22px}
+.card h2{font-size:16px}
+.card h2 .st{width:24px;height:24px;font-size:11px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.row{gap:10px}
+label.f{gap:4px;font-size:13px}
+input[type=text],input[type=tel],input[type=email],input[type=url],textarea,select{padding:9px 12px;border-radius:12px}
+textarea{min-height:58px}
+.lvl{display:grid;gap:6px}.lvl b{font-size:13px}
+.chips button{padding:6px 12px;font-size:13px}
+.svc{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.svc label{grid-template-columns:20px minmax(0,1fr) auto;gap:10px;padding:10px 12px;border-radius:16px}
+.svc input{width:18px;height:18px}
+.svc b{font-size:14px;line-height:1.25}
+.svc span.d{display:block;font-size:12px;line-height:1.35}
+.svc span.w{display:block;font-size:11.5px;font-weight:700;color:var(--blue);margin-top:2px}
+.svc label.wide{grid-column:1/-1}
+.svc .p{font-size:15px}
+.drop{padding:10px;border-radius:14px;gap:0}
+.days{grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}
+.days button{padding:6px 0;border-radius:12px}
+.days button b{font-size:14px}
+.tog{font-size:13px;gap:10px}
+.sum{padding:18px;gap:10px;border-radius:22px}
+.sum .price{font-size:34px}
+.sum ol{font-size:13px;gap:4px}
+.go{padding:13px 18px;font-size:15px}
+.emb .top,.emb .back,.emb h1{display:none}
+.emb .page{padding:0;max-width:none}
+.emb body,.emb{background:transparent}
+@media (max-width:860px){.row3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.row3,.svc{grid-template-columns:minmax(0,1fr)}.days{grid-template-columns:repeat(5,minmax(0,1fr))}.card{padding:16px}}
 </style>
 </head><body>
 
@@ -103,42 +139,35 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
       <section class="card">
         <h2><span class="st">1</span>აირჩიე მომსახურება</h2>
         <div class="svc" id="svc"></div>
-        <label class="tog"><input type="checkbox" id="stu"> <span><b>სტუდენტი ვარ</b><br><span class="hint">ფასდაკლება 20%. სტატუსს პირველ შეხვედრამდე გადავამოწმებთ.</span></span></label>
+        <label class="tog"><input type="checkbox" id="stu"> <span><b>სტუდენტი ვარ</b> <span class="hint">· ფასდაკლება 20%, სტატუსს პირველ შეხვედრამდე გადავამოწმებთ.</span></span></label>
       </section>
 
       <section class="card">
         <h2><span class="st">2</span>შენ შესახებ</h2>
-        <div class="row">
-          <label class="f" id="w-name">სახელი და გვარი<input type="text" id="name" autocomplete="name" placeholder="მაგ.: ნინო ბერიძე"><span class="msg" hidden>შეიყვანე სახელი და გვარი</span></label>
+        <div class="row3">
+          <label class="f" id="w-name">სახელი და გვარი<input type="text" id="name" autocomplete="name" placeholder="ნინო ბერიძე"><span class="msg" hidden>შეიყვანე სახელი და გვარი</span></label>
           <label class="f" id="w-tel">ტელეფონი<input type="tel" id="tel" autocomplete="tel" placeholder="5XX XX XX XX"><span class="msg" hidden>შეიყვანე ტელეფონის ნომერი</span></label>
+          <label class="f" id="w-mail">ელ-ფოსტა<input type="email" id="mail" autocomplete="email" placeholder="name@example.com"><span class="msg" hidden>შეიყვანე სწორი ელ-ფოსტა</span></label>
+          <label class="f" id="w-spec">სპეციალობა<input type="text" id="spec" placeholder="მაგ.: HR"><span class="msg" hidden>მიუთითე სპეციალობა</span></label>
+          <label class="f">სასურველი პოზიცია<input type="text" id="pos" placeholder="მაგ.: რეკრუტერი"></label>
+          <label class="f">სახელფასო მოლოდინი<input type="text" id="sal" inputmode="numeric" maxlength="40" placeholder="მაგ.: 1500 ₾ ხელზე"></label>
         </div>
-        <label class="f" id="w-mail">ელ-ფოსტა <small>აქ მიიღებ ქვითარს და კალენდრის მოსაწვევს</small><input type="email" id="mail" autocomplete="email" placeholder="name@example.com"><span class="msg" hidden>შეიყვანე სწორი ელ-ფოსტა</span></label>
-        <label class="f" id="w-spec">სპეციალობა<input type="text" id="spec"><span class="msg" hidden>მიუთითე სპეციალობა</span></label>
-      </section>
-
-      <section class="card">
-        <h2><span class="st">3</span>რა სამსახურს ეძებ</h2>
-        <label class="f">სასურველი პოზიცია<input type="text" id="pos" placeholder="მაგ.: გაყიდვების მენეჯერი"></label>
-        <div class="f" style="display:grid;gap:8px"><b style="font-size:13.5px">შენი დონე</b><div class="chips" id="lvl"></div></div>
-        <label class="f">სახელფასო მოლოდინი <small>თვეში, ხელზე</small><input type="text" id="sal" inputmode="numeric" maxlength="40" placeholder="მაგ.: 1500 ₾ ან 1200–1500 ₾"></label>
+        <div class="f lvl"><b>შენი დონე</b><div class="chips" id="lvl"></div></div>
         <div class="row">
-          <label class="f" id="w-cv">CV <small>მხოლოდ PDF, 5 მბ-მდე</small>
-            <span class="drop" id="drop" tabindex="0"><b id="dropT">ატვირთე CV</b><span class="hint">დააჭირე ან ჩააგდე ფაილი</span></span>
+          <label class="f" id="w-cv">CV
+            <span class="drop" id="drop" tabindex="0"><b id="dropT">ატვირთე CV</b><span class="hint">მხოლოდ PDF, 5 მბ-მდე</span></span>
             <input type="file" id="cv" accept=".pdf,application/pdf" hidden><span class="msg" id="cvMsg" hidden>ატვირთე CV PDF ფორმატში</span></label>
-          <label class="f">LinkedIn <small>სასურველია</small><input type="url" id="li" placeholder="linkedin.com/in/…"></label>
+          <label class="f">LinkedIn · სასურველია<input type="url" id="li" placeholder="linkedin.com/in/…"></label>
         </div>
       </section>
 
-      <section class="card" id="cal">
-        <h2><span class="st">4</span>როდის დავიწყოთ</h2>
-        <p class="hint">მონიშნე დღე, როცა პირველი შეხვედრა გაწყობს. ყველა შეხვედრა ონლაინ ტარდება.</p>
-        <div class="days" id="days"></div>
-        <div class="f" style="display:grid;gap:8px"><b style="font-size:13.5px">ტემპი</b><div class="chips" id="pace"></div></div>
-        <p class="hint">თუ შეთანხმებულ დროს ვერ ახერხებ, შეხვედრამდე არანაკლებ 1 დღით ადრე გააუქმე ის კალენდრიდან და მონიშნე ახალი დღე. თუ არ გააუქმებ და არც დაესწრები, შეხვედრა ჩატარებულად ჩაითვლება.</p>
-      </section>
-
       <section class="card">
-        <label class="f">რამე დამატებით? <small>არასავალდებულო</small><textarea id="cmt" placeholder="მაგ.: მომავალ კვირას გასაუბრება მაქვს ბანკში"></textarea></label>
+        <div id="cal" class="f">
+          <h2><span class="st">3</span>პირველი შეხვედრის დღე</h2>
+          <div class="days" id="days"></div>
+          <p class="hint">ყველა შეხვედრა ონლაინ ტარდება. ვერ ახერხებ? შეხვედრამდე არანაკლებ 1 დღით ადრე გააუქმე კალენდრიდან და მონიშნე ახალი დღე, თორემ შეხვედრა ჩატარებულად ჩაითვლება.</p>
+        </div>
+        <label class="f">რამე დამატებით? · არასავალდებულო<textarea id="cmt" rows="2" placeholder="მაგ.: მომავალ კვირას გასაუბრება მაქვს ბანკში"></textarea></label>
         <label class="tog" id="w-terms"><input type="checkbox" id="terms"> <span>გავეცანი პირობებს: გადახდილი თანხა არ ბრუნდება. თუ შეხვედრას კალენდრიდან არ გავაუქმებ და არც დავესწრები, მომსახურება მიღებულად ჩაითვლება. <span class="msg" hidden><br>მონიშნე, რომ გაეცანი პირობებს</span></span></label>
         <label class="tog" id="w-ok"><input type="checkbox" id="ok"> <span>ვეთანხმები, რომ SMART Support-მა ჩემი მონაცემები და CV დაამუშაოს შემდგომში დასაქმების მიზნით, 3 წლამდე ვადით. <span class="msg" hidden><br>მონიშნე თანხმობა</span></span></label>
       </section>
@@ -190,36 +219,34 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
   var PAYLINK='';
   var $=function(i){return document.getElementById(i)};
   var S=[
-    {id:'cv9',t:'CV-ის უკუკავშირი',d:'წერილობითი + 15 წუთიანი გაცნობითი შეხვედრა',p:9,meet:true},
-    {id:'cvli',t:'CV და LinkedIn',d:'წერილობითი უკუკავშირი ორივეზე',p:19,meet:false},
-    {id:'iv',t:'საცდელი გასაუბრება',d:'40–60 წუთი, უკუკავშირით',p:29,meet:true},
-    {id:'vac',t:'შენზე მორგებული ვაკანსიები',d:'სრული სია შენი უნარებით',p:29,meet:false},
-    {id:'full',t:'სრული პროგრამა',d:'CV და LinkedIn + 2 საცდელი გასაუბრება',p:59,meet:true,tag:'ცალ-ცალკე 77 ₾'}];
+    {id:'cv9',t:'CV-ის უკუკავშირი',d:'წერილობით + 15 წთ. გაცნობითი შეხვედრა',w:'უკუკავშირი 3 სამუშაო დღეში',p:9,meet:true},
+    {id:'cvli',t:'CV და LinkedIn',d:'წერილობითი უკუკავშირი ორივეზე',w:'უკუკავშირი 5 სამუშაო დღეში',p:19,meet:false},
+    {id:'iv',t:'საცდელი გასაუბრება',d:'40–60 წუთი, ონლაინ',w:'უკუკავშირი შეხვედრიდან 2 სამუშაო დღეში',p:29,meet:true},
+    {id:'vac',t:'შენზე მორგებული ვაკანსიები',d:'სრული სია შენი უნარებით',w:'სია გადახდისთანავე გაიხსნება',p:29,meet:false},
+    {id:'full',t:'სრული პროგრამა',d:'CV და LinkedIn + 2 საცდელი გასაუბრება',w:'CV და LinkedIn 5 სამუშაო დღეში · 2 გასაუბრება 3 კვირაში, თითოეულის უკუკავშირი 2 სამუშაო დღეში',p:59,meet:true,tag:'ცალ-ცალკე 77 ₾'}];
   var LV=['სტაჟიორი','დამწყები','საშუალო','გამოცდილი','ხელმძღვანელი'];
-  var PACE=[['სწრაფი',3],['სტანდარტული',7],['მშვიდი',14]];
   var DN=['კვი','ორშ','სამ','ოთხ','ხუთ','პარ','შაბ'],MN=['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'];
-  var st={svc:'full',lvl:2,pace:1,day:null,file:'',fobj:null};
+  var st={svc:'full',lvl:2,day:null,file:'',fobj:null};
+  var EMB=/[?&]embed=1/.test(location.search);if(EMB)document.documentElement.classList.add('emb');
   var q=(location.search.match(/[?&]s=([a-z0-9]+)/)||[])[1];if(q&&S.some(function(x){return x.id===q}))st.svc=q;
   if(ENDPOINT)$('demoNote').hidden=true;
   function f(n){return Math.round(n).toLocaleString('en-US')}
   function price(p){return $('stu').checked?Math.round(p*0.8):p}
-  $('svc').innerHTML=S.map(function(s){return '<label><input type="radio" name="svc" value="'+s.id+'"'+(s.id===st.svc?' checked':'')+'><span><b>'+s.t+(s.tag?'<span class="tag">'+s.tag+'</span>':'')+'</b><span class="d">'+s.d+'</span></span><span class="p" data-p="'+s.p+'">'+s.p+' ₾</span></label>'}).join('');
+  $('svc').innerHTML=S.map(function(s){return '<label'+(s.id==='full'?' class="wide"':'')+'><input type="radio" name="svc" value="'+s.id+'"'+(s.id===st.svc?' checked':'')+'><span><b>'+s.t+(s.tag?'<span class="tag">'+s.tag+'</span>':'')+'</b><span class="d">'+s.d+'</span><span class="w">⏱ '+s.w+'</span></span><span class="p" data-p="'+s.p+'">'+s.p+' ₾</span></label>'}).join('');
   $('lvl').innerHTML=LV.map(function(n,i){return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===st.lvl)+'">'+n+'</button>'}).join('');
-  $('pace').innerHTML=PACE.map(function(p,i){return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===st.pace)+'">'+p[0]+' · '+p[1]+' დღე</button>'}).join('');
-  var t0=new Date();t0.setHours(0,0,0,0);var D=[];for(var i=1;i<=14;i++){var d=new Date(t0);d.setDate(t0.getDate()+i);D.push(d)}
-  $('days').innerHTML=D.map(function(d,i){var we=d.getDay()===0||d.getDay()===6;return '<button type="button" data-i="'+i+'"'+(we?' disabled':'')+' aria-pressed="false"><small>'+DN[d.getDay()]+'</small><b>'+d.getDate()+'</b></button>'}).join('');
+  var t0=new Date();t0.setHours(0,0,0,0);var D=[];for(var i=1;D.length<10&&i<30;i++){var d=new Date(t0);d.setDate(t0.getDate()+i);if(d.getDay()!==0&&d.getDay()!==6)D.push(d)}
+  $('days').innerHTML=D.map(function(d,i){return '<button type="button" data-i="'+i+'" aria-pressed="false" title="'+d.getDate()+' '+MN[d.getMonth()]+'"><small>'+DN[d.getDay()]+'</small><b>'+d.getDate()+'</b></button>'}).join('');
   function cur(){return S.filter(function(s){return s.id===st.svc})[0]}
   function sum(){var s=cur(),p=price(s.p);
     $('sName').textContent=s.t;$('sPrice').textContent=p+' ₾';$('sOld').hidden=p===s.p;$('sOld').textContent=s.p+' ₾';
     [].forEach.call(document.querySelectorAll('.svc .p'),function(e){var b=+e.dataset.p;e.textContent=price(b)+' ₾'});
     $('cal').hidden=!s.meet;
-    var d=st.day!=null&&s.meet?D[st.day]:null;$('sWhen').hidden=!d;if(d)$('sDay').textContent=d.getDate()+' '+MN[d.getMonth()]+(s.id==='full'?' · ტემპი: '+PACE[st.pace][0]:'');
-    $('sStep3').textContent=s.meet?'კალენდრის მოსაწვევს შეხვედრის ბმულით ელ-ფოსტაზე მიიღებ':(s.id==='vac'?'სრული სია გადახდისთანავე გაიხსნება':'წერილობით უკუკავშირს ელ-ფოსტაზე მიიღებ')}
+    var d=st.day!=null&&s.meet?D[st.day]:null;$('sWhen').hidden=!d;if(d)$('sDay').textContent=d.getDate()+' '+MN[d.getMonth()];
+    $('sStep3').textContent=(s.meet?'კალენდრის მოსაწვევს შეხვედრის ბმულით ელ-ფოსტაზე მიიღებ. ':'')+s.w}
   function press(box,b){[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b)})}
   $('svc').addEventListener('change',function(e){st.svc=e.target.value;sum()});
   $('stu').addEventListener('change',sum);
   $('lvl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;st.lvl=+b.dataset.i;press($('lvl'),b)});
-  $('pace').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;st.pace=+b.dataset.i;press($('pace'),b);sum()});
   $('days').addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;st.day=+b.dataset.i;press($('days'),b);sum()});
   function pick(fl){if(!fl)return;var m=$('cvMsg');
     if(!/\.pdf$/i.test(fl.name)){st.file='';st.fobj=null;$('dropT').textContent='ატვირთე CV';$('drop').classList.remove('has');$('w-cv').classList.add('bad');m.textContent='ეს ფაილი PDF არ არის. შეინახე CV PDF-ად და თავიდან ატვირთე.';m.hidden=false;return}
@@ -241,20 +268,20 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
       $('dTitle').textContent=s.t+' · '+price(s.p)+' ₾';
       if(ENDPOINT&&!PAYLINK){
         var md=st.day!=null&&s.meet?D[st.day]:null;
-        $('dText').textContent='რეგისტრაცია მიღებულია.'+(md?' შენი შეხვედრა: '+md.getDate()+' '+MN[md.getMonth()]+'.':'')+' ონლაინ გადახდა მალე ჩაირთვება და ბმულს ელ-ფოსტაზე მიიღებ: '+$('mail').value.trim()+'.';
+        $('dText').textContent='რეგისტრაცია მიღებულია.'+(md?' შენი შეხვედრა: '+md.getDate()+' '+MN[md.getMonth()]+'.':'')+' '+s.w+' (ვადა ითვლება გადახდიდან). ონლაინ გადახდა მალე ჩაირთვება და ბმულს ელ-ფოსტაზე მიიღებ: '+$('mail').value.trim()+'.';
         $('pay').hidden=true;$('payHint').hidden=true;$('again').hidden=true;
       }else{
         $('dText').textContent='ბოლო ნაბიჯი: გადახდა ბარათით. გადახდის შემდეგ '+$('mail').value.trim()+' მისამართზე მიიღებ ბანკის ქვითარს'+(s.meet?' და კალენდრის მოსაწვევს.':'.');$('pay').textContent='გადახდა · '+price(s.p)+' ₾';
         if(PAYLINK){$('payHint').hidden=true;$('again').hidden=true}
       }
-      scrollTo({top:0,behavior:'smooth'});if(window.parent!==window)window.parent.postMessage({ktop:1},'*')}
+      if(!EMB)scrollTo({top:0,behavior:'smooth'});if(window.parent!==window)window.parent.postMessage({ktop:1},'*')}
     if(!ENDPOINT){showDone();return}
     var btn=$('goBtn'),er=$('sendErr');er.hidden=true;btn.disabled=true;btn.textContent='იგზავნება…';
     function fail(t){btn.disabled=false;btn.textContent='გადახდაზე გადასვლა';er.textContent=t||'გაგზავნა ვერ მოხერხდა. შეამოწმე ინტერნეტი და სცადე თავიდან.';er.hidden=false}
     function send(cv){var d=st.day!=null&&s.meet?D[st.day]:null;
       var body={hp:$('hp').value,name:$('name').value.trim(),tel:$('tel').value.trim(),mail:$('mail').value.trim(),spec:$('spec').value.trim(),
         svc:s.t,stu:$('stu').checked,pos:$('pos').value.trim(),lvl:LV[st.lvl],li:$('li').value.trim(),sal:$('sal').value.trim(),
-        day:d?(d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)):'',pace:s.id==='full'?PACE[st.pace][0]:'',
+        day:d?(d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)):'',pace:'',
         cmt:$('cmt').value.trim(),ok:$('ok').checked,cv:cv};
       fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(){showDone()}).catch(function(){fail('გაგზავნა ვერ მოხერხდა. შეამოწმე ინტერნეტი და სცადე თავიდან.')})}
     if(st.fobj){var rd=new FileReader();rd.onload=function(){send({name:st.file,data:String(rd.result).split(',')[1]})};rd.onerror=function(){fail('CV-ის წაკითხვა ვერ მოხერხდა. სცადე თავიდან.')};rd.readAsDataURL(st.fobj)}
@@ -265,6 +292,9 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
     $('pNext').textContent=s.meet?('კალენდრის მოსაწვევი '+(d?d.getDate()+' '+MN[d.getMonth()]+'-ის ':'')+'შეხვედრის დროით და ბმულით ელ-ფოსტაზე მოგივა'):(s.id==='vac'?'სრული სია უკვე გახსნილია გვერდზე „შენზე მორგებული ვაკანსიები“':'წერილობით უკუკავშირს ელ-ფოსტაზე მიიღებ');scrollTo({top:0,behavior:'smooth'})});
   $('again2').addEventListener('click',function(){$('paid').hidden=true;$('main').hidden=false});
   $('thm').addEventListener('click',function(){var r=document.documentElement,dk=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.setAttribute('data-theme',dk?'light':'dark')});
+  window.addEventListener('message',function(e){var m=e.data||{};
+    if(m.ksvc&&S.some(function(x){return x.id===m.ksvc})){st.svc=m.ksvc;var r=document.querySelector('input[name=svc][value="'+m.ksvc+'"]');if(r)r.checked=true;$('done').hidden=true;$('paid').hidden=true;$('main').hidden=false;sum()}
+    if(m.ktheme)document.documentElement.setAttribute('data-theme',m.ktheme)});
   sum();
 })();
 </script>
@@ -273,7 +303,7 @@ aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));display:grid;ga
 (function(){if(window.parent===window)return;var last=0;
 function send(){var b=document.body,cs=getComputedStyle(b),h=Math.ceil(b.getBoundingClientRect().height+parseFloat(cs.marginTop)+parseFloat(cs.marginBottom));if(Math.abs(h-last)>2){last=h;window.parent.postMessage({kh:h},'*')}}
 window.addEventListener('message',function(e){if(e.data&&e.data.khAck){document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden'}});
-window.addEventListener('load',function(){send();window.parent.postMessage({ktop:1},'*')});window.addEventListener('resize',send);
+window.addEventListener('load',function(){send();if(!/[?&]embed=1/.test(location.search))window.parent.postMessage({ktop:1},'*')});window.addEventListener('resize',send);
 if('ResizeObserver' in window)new ResizeObserver(send).observe(document.body);setInterval(send,1500);send()})();
 </script>
 </body></html>

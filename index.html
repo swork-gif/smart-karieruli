@@ -861,14 +861,32 @@ details > summary{font-weight:500}
         <div><dt>გადატანა და გაუქმება</dt><dd>თუ შეთანხმებულ დროს ვერ ახერხებ, შეხვედრამდე არანაკლებ 1 დღით ადრე გააუქმე ის კალენდრიდან და მონიშნე ახალი დღე.</dd></div>
         <div><dt>გამოუცხადებლობა</dt><dd>თუ შეხვედრას კალენდრიდან არ გააუქმებ და არც დაესწრები, მომსახურება მიღებულად ჩაითვლება.</dd></div>
         <div><dt>თანხის დაბრუნება</dt><dd>გადახდის შემდეგ გადაფიქრების შემთხვევაში გადახდილი თანხა არ ბრუნდება.</dd></div>
+        <div><dt>უკუკავშირის ვადები</dt><dd>CV-ის უკუკავშირი: 3 სამუშაო დღე. CV და LinkedIn: 5 სამუშაო დღე. საცდელი გასაუბრება: უკუკავშირი შეხვედრიდან 2 სამუშაო დღეში. სრული პროგრამა: 3 კვირა. ვაკანსიების სია: გადახდისთანავე. ვადა ითვლება გადახდიდან.</dd></div>
         <div><dt>CV არ გაქვს?</dt><dd>პირველ შეხვედრაზე სტრუქტურას ერთად ავაწყობთ.</dd></div>
       </dl>
     </section>
 
-    <section class="t sun w4 cta">
-      <h3>მზად ხარ? დარეგისტრირდი და მონიშნე პირველი შეხვედრის დღე.</h3>
-      <a href="https://swork-gif.github.io/smart-karieruli/forma/" target="_blank" rel="noopener">დარეგისტრირდი</a>
-    </section>
+    <div class="sh" id="reg"><h2>დარეგისტრირდი</h2><span>აირჩიე მომსახურება და მონიშნე პირველი შეხვედრის დღე</span></div>
+    <div class="w4 k-reg">
+      <iframe id="regF" src="https://swork-gif.github.io/smart-karieruli/forma/?embed=1" title="რეგისტრაციის ფორმა" style="width:100%;height:1250px;border:0;display:block;background:transparent" allowtransparency="true"></iframe>
+      <p class="note" style="margin:6px 4px 0">ფორმა არ ჩანს? <a href="https://swork-gif.github.io/smart-karieruli/forma/" target="_blank" rel="noopener">გახსენი ცალკე გვერდზე</a></p>
+    </div>
+    <script>
+    (function(){
+      var f=document.getElementById('regF');if(!f)return;
+      function goReg(){var t=document.getElementById('reg');if(!t)return;
+        if(window.parent!==window){try{window.parent.postMessage({kscroll:Math.max(0,Math.round(t.getBoundingClientRect().top+window.pageYOffset-10))},'*')}catch(e){}}
+        else t.scrollIntoView({behavior:'smooth',block:'start'})}
+      addEventListener('message',function(e){if(e.source!==f.contentWindow||!e.data)return;
+        if(e.data.kh){f.style.height=(e.data.kh+4)+'px';try{f.contentWindow.postMessage({khAck:1},'*')}catch(x){}}
+        if(e.data.ktop)goReg()});
+      document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#reg"]');if(!a)return;e.preventDefault();
+        var sv=a.getAttribute('data-ksvc');if(sv){try{f.contentWindow.postMessage({ksvc:sv},'*')}catch(x){}}goReg()},true);
+      var mq=matchMedia('(prefers-color-scheme: dark)');
+      function th(){try{f.contentWindow.postMessage({ktheme:document.documentElement.getAttribute('data-theme')||(mq.matches?'dark':'light')},'*')}catch(e){}}
+      f.addEventListener('load',th);new MutationObserver(th).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+    })();
+    </script>
 
   </div>
 
@@ -993,7 +1011,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
   function listHtml(LIST){var h='';
     if(!LIST.length)return '<p style="font-size:13.5px">ახლა შესაფერისი ღია ვაკანსია არ არის. მონიშნე მეტი უნარი.</p>';
     h+=salNote(LIST)+'<ul class="vlist">'+LIST.slice(0,3).map(function(v){var u=url(v[6]);return '<li><b>'+esc(MD.tt[v[2]])+'</b><span>'+esc(MD.co[v[3]])+(MD.ci[v[4]]?' · '+esc(MD.ci[v[4]]):'')+(v[5]?' · ვადა '+dl(v[5]):'')+(v[7]?' · <b class="vsal">'+sal(v)+'</b>':'')+'</span>'+(u?'<a href="'+u+'" target="_blank" rel="noopener">ვაკანსიის ნახვა</a>':'')+'</li>'}).join('')+'</ul>';
-    if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="https://swork-gif.github.io/smart-karieruli/forma/?s=vac" target="_blank" rel="noopener">გახსენი სრული სია · 29 ₾</a></div></div>';
+    if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="#reg" data-ksvc="vac">გახსენი სრული სია · 29 ₾</a></div></div>';
     return h}
   var CB='https://smartacademy.ge/trainings/',UT='?utm_source=career&utm_medium=matcher',PROMO='';
   var CRS={xls:['MS Excel: საბაზისოდან მონაცემთა ანალიზამდე','342-MICROSOFT-EXCEL'],xla:['MS Excel მონაცემთა ანალიზისთვის','331-MS-Excel-%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%AA%E1%83%94%E1%83%9B%E1%83%97%E1%83%90-%E1%83%90%E1%83%9C%E1%83%90%E1%83%9A%E1%83%98%E1%83%96%E1%83%98%E1%83%A1%E1%83%97%E1%83%95%E1%83%98%E1%83%A1'],
@@ -1042,7 +1060,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
       if(!LIST.length)h+='<p style="font-size:13.5px">ახლა შესაფერისი ღია ვაკანსია არ არის. მონიშნე მეტი უნარი ან სხვა პოზიცია.</p>';
       else{
         h+=salNote(LIST)+'<ul class="vlist">'+LIST.slice(0,3).map(function(v){var u=url(v[6]);return '<li><b>'+esc(MD.tt[v[2]])+'</b><span>'+esc(MD.co[v[3]])+(MD.ci[v[4]]?' · '+esc(MD.ci[v[4]]):'')+(v[5]?' · ვადა '+dl(v[5]):'')+(v[7]?' · <b class="vsal">'+sal(v)+'</b>':'')+'</span>'+(u?'<a href="'+u+'" target="_blank" rel="noopener">ვაკანსიის ნახვა</a>':'')+'</li>'}).join('')+'</ul>';
-        if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="https://swork-gif.github.io/smart-karieruli/forma/?s=vac" target="_blank" rel="noopener">გახსენი სრული სია · 29 ₾</a></div></div>';
+        if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="#reg" data-ksvc="vac">გახსენი სრული სია · 29 ₾</a></div></div>';
       }
     }
     h+='</div>';

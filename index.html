@@ -763,6 +763,14 @@ details > summary{font-weight:500}
 #mres .pcode label{font-size:12.5px;font-weight:800;color:#5E5B78;width:100%}
 #mres .pcode input{flex:1 1 180px;min-width:0;font-family:Unbounded,sans-serif;font-weight:800;font-size:16px;letter-spacing:.06em;color:#3340FF;background:#F4F2FF;border:2px dashed #7A5CFF;border-radius:14px;padding:11px 14px}
 #mres .pcode button{font:inherit;font-weight:900;font-size:13.5px;color:#fff;background:#3340FF;border:0;border-radius:99px;padding:11px 18px;cursor:pointer}
+
+/* compact pass 11/13: duplicates of the form hidden, conditions as accordions */
+.k-prg .k-book{display:none}
+#prices,.k-price{display:none}
+.k-acc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start}
+.k-acc details{background:var(--bg);color:var(--ink)}
+.k-acc details .in{color:var(--muted)}
+@media (max-width:620px){.k-acc{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <div class="page">
@@ -854,16 +862,16 @@ details > summary{font-weight:500}
 
     <div class="sh" id="info"><h2>შეხვედრების პირობები</h2><span>ფორმატი, ხანგრძლივობა, ჩაწერა და გადატანა</span></div>
     <section class="t w4 k-info">
-      <dl>
-        <div><dt>ფორმატი</dt><dd>ყველა შეხვედრა ონლაინ ტარდება.</dd></div>
-        <div><dt>ხანგრძლივობა</dt><dd>საცდელი გასაუბრება 40–60 წუთია. მხოლოდ CV-ის სერვისზე გაცნობითი შეხვედრა 15 წუთია.</dd></div>
-        <div><dt>ჯავშანი</dt><dd>კალენდარში მონიშნე შენთვის სასურველი დღე.</dd></div>
-        <div><dt>გადატანა და გაუქმება</dt><dd>თუ შეთანხმებულ დროს ვერ ახერხებ, შეხვედრამდე არანაკლებ 1 დღით ადრე გააუქმე ის კალენდრიდან და მონიშნე ახალი დღე.</dd></div>
-        <div><dt>გამოუცხადებლობა</dt><dd>თუ შეხვედრას კალენდრიდან არ გააუქმებ და არც დაესწრები, მომსახურება მიღებულად ჩაითვლება.</dd></div>
-        <div><dt>თანხის დაბრუნება</dt><dd>გადახდის შემდეგ გადაფიქრების შემთხვევაში გადახდილი თანხა არ ბრუნდება.</dd></div>
-        <div><dt>უკუკავშირის ვადები</dt><dd>CV-ის უკუკავშირი: 3 სამუშაო დღე. CV და LinkedIn: 5 სამუშაო დღე. საცდელი გასაუბრება: უკუკავშირი შეხვედრიდან 2 სამუშაო დღეში. სრული პროგრამა: 3 კვირა. ვაკანსიების სია: გადახდისთანავე. ვადა ითვლება გადახდიდან.</dd></div>
-        <div><dt>CV არ გაქვს?</dt><dd>პირველ შეხვედრაზე სტრუქტურას ერთად ავაწყობთ.</dd></div>
-      </dl>
+      <div class="k-acc">
+        <details><summary>ფორმატი</summary><div class="in">ყველა შეხვედრა ონლაინ ტარდება.</div></details>
+        <details><summary>ხანგრძლივობა</summary><div class="in">საცდელი გასაუბრება 40–60 წუთია. მხოლოდ CV-ის სერვისზე გაცნობითი შეხვედრა 15 წუთია.</div></details>
+        <details><summary>ჯავშანი</summary><div class="in">კალენდარში მონიშნე შენთვის სასურველი დღე.</div></details>
+        <details><summary>გადატანა და გაუქმება</summary><div class="in">თუ შეთანხმებულ დროს ვერ ახერხებ, შეხვედრამდე არანაკლებ 1 დღით ადრე გააუქმე ის კალენდრიდან და მონიშნე ახალი დღე.</div></details>
+        <details><summary>გამოუცხადებლობა</summary><div class="in">თუ შეხვედრას კალენდრიდან არ გააუქმებ და არც დაესწრები, მომსახურება მიღებულად ჩაითვლება.</div></details>
+        <details><summary>თანხის დაბრუნება</summary><div class="in">გადახდის შემდეგ გადაფიქრების შემთხვევაში გადახდილი თანხა არ ბრუნდება.</div></details>
+        <details><summary>უკუკავშირის ვადები</summary><div class="in">CV-ის უკუკავშირი: 3 სამუშაო დღე. CV და LinkedIn: 5 სამუშაო დღე. საცდელი გასაუბრება: უკუკავშირი შეხვედრიდან 2 სამუშაო დღეში. სრული პროგრამა: 3 კვირა. ვაკანსიების სია: გადახდისთანავე. ვადა ითვლება გადახდიდან.</div></details>
+        <details><summary>CV არ გაქვს?</summary><div class="in">პირველ შეხვედრაზე სტრუქტურას ერთად ავაწყობთ.</div></details>
+      </div>
     </section>
 
     <div class="sh" id="reg"><h2>დარეგისტრირდი</h2><span>აირჩიე მომსახურება და მონიშნე პირველი შეხვედრის დღე</span></div>

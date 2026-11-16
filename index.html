@@ -882,6 +882,9 @@ details > summary{font-weight:500}
     <script>
     (function(){
       var f=document.getElementById('regF');if(!f)return;
+      /* წყაროს გადაცემა ფორმისთვის: utm_* და ref პარამეტრები */
+      var KQ=(function(){try{var p=new URLSearchParams(location.search),o=new URLSearchParams();['utm_source','utm_medium','utm_campaign','ref'].forEach(function(k){var v=p.get(k);if(v)o.set(k,v.slice(0,80))});return o.toString()}catch(e){return ''}})();
+      if(KQ){f.src=f.src+'&'+KQ;f.addEventListener('load',function(){try{f.contentWindow.postMessage({kutm:'?'+KQ},'*')}catch(e){}})}
       function goReg(){var t=document.getElementById('reg');if(!t)return;
         if(window.parent!==window){try{window.parent.postMessage({kscroll:Math.max(0,Math.round(t.getBoundingClientRect().top+window.pageYOffset-10))},'*')}catch(e){}}
         else t.scrollIntoView({behavior:'smooth',block:'start'})}
@@ -1168,6 +1171,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
 
 
 </script>
+
 <script>
 /* SMART: iframe-ის სიმაღლის ავტომატური მორგება */
 (function(){if(window.parent===window)return;var last=0;

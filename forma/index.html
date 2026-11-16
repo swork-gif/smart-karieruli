@@ -228,6 +228,11 @@ textarea{min-height:58px}
   var DN=['კვი','ორშ','სამ','ოთხ','ხუთ','პარ','შაბ'],MN=['იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'];
   var st={svc:'full',lvl:2,day:null,file:'',fobj:null};
   var EMB=/[?&]embed=1/.test(location.search);if(EMB)document.documentElement.classList.add('emb');
+  /* წყარო: utm_source / utm_medium / utm_campaign ან ref (მშობელი გვერდიდან), თორემ referrer */
+  function srcFrom(q){var p=new URLSearchParams(q||''),u=['utm_source','utm_medium','utm_campaign'].map(function(k){return (p.get(k)||'').trim().slice(0,60)}).filter(Boolean);
+    if(u.length)return u.join(' / ');var r=(p.get('ref')||'').trim().slice(0,80);return r?('ref: '+r):''}
+  var SRC=srcFrom(location.search);
+  if(!SRC&&!EMB&&document.referrer){try{var rh=new URL(document.referrer).hostname;if(rh&&rh!==location.hostname)SRC='ref: '+rh}catch(_){}}
   var q=(location.search.match(/[?&]s=([a-z0-9]+)/)||[])[1];if(q&&S.some(function(x){return x.id===q}))st.svc=q;
   if(ENDPOINT)$('demoNote').hidden=true;
   function f(n){return Math.round(n).toLocaleString('en-US')}
@@ -282,7 +287,7 @@ textarea{min-height:58px}
       var body={hp:$('hp').value,name:$('name').value.trim(),tel:$('tel').value.trim(),mail:$('mail').value.trim(),spec:$('spec').value.trim(),
         svc:s.t,stu:$('stu').checked,pos:$('pos').value.trim(),lvl:LV[st.lvl],li:$('li').value.trim(),sal:$('sal').value.trim(),
         day:d?(d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)):'',pace:'',
-        cmt:$('cmt').value.trim(),ok:$('ok').checked,cv:cv};
+        cmt:$('cmt').value.trim(),ok:$('ok').checked,src:SRC,cv:cv};
       fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(){showDone()}).catch(function(){fail('გაგზავნა ვერ მოხერხდა. შეამოწმე ინტერნეტი და სცადე თავიდან.')})}
     if(st.fobj){var rd=new FileReader();rd.onload=function(){send({name:st.file,data:String(rd.result).split(',')[1]})};rd.onerror=function(){fail('CV-ის წაკითხვა ვერ მოხერხდა. სცადე თავიდან.')};rd.readAsDataURL(st.fobj)}
     else send(null)});
@@ -294,7 +299,8 @@ textarea{min-height:58px}
   $('thm').addEventListener('click',function(){var r=document.documentElement,dk=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.setAttribute('data-theme',dk?'light':'dark')});
   window.addEventListener('message',function(e){var m=e.data||{};
     if(m.ksvc&&S.some(function(x){return x.id===m.ksvc})){st.svc=m.ksvc;var r=document.querySelector('input[name=svc][value="'+m.ksvc+'"]');if(r)r.checked=true;$('done').hidden=true;$('paid').hidden=true;$('main').hidden=false;sum()}
-    if(m.ktheme)document.documentElement.setAttribute('data-theme',m.ktheme)});
+    if(m.ktheme)document.documentElement.setAttribute('data-theme',m.ktheme);
+    if(typeof m.kutm==='string'&&!SRC)SRC=srcFrom(m.kutm)});
   sum();
 })();
 </script>

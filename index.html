@@ -754,6 +754,7 @@ details > summary{font-weight:500}
 #mres .crs i{font-style:normal;font-size:13px;font-weight:800;color:#3340FF}
 .crs:hover,.crs:focus-visible{border-color:#3340FF}
 .crsl{display:inline-block;margin-top:6px;font-size:13px;font-weight:800;color:#3340FF;text-decoration:underline}
+.xjump{color:#3340FF;font-weight:800;text-decoration:underline}
 .crsx{display:grid;gap:2px;margin-top:6px;width:100%}.crsx em{font-style:normal;font-size:12.5px;font-weight:700;color:#5E5B78}.crsx .crsl{margin-top:2px}
 
 #mres .offer{display:grid;gap:10px;margin-top:10px;padding:18px 20px;border-radius:20px;background:#fff;border:2px solid #B7A6FF;color:#16142B}
@@ -973,6 +974,7 @@ details > summary{font-weight:500}
     el.scrollIntoView({behavior:'smooth',block:'start'})}
   links.forEach(function(a,i){a.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();
     go(secs[i]);nav.classList.remove('open');tog.setAttribute('aria-expanded','false')})});
+  document.addEventListener('click',function(e){var x=e.target.closest&&e.target.closest('a.xjump');if(!x)return;e.preventDefault();go(document.getElementById('xcrs'))});
   tog.addEventListener('click',function(){var o=nav.classList.toggle('open');tog.setAttribute('aria-expanded',o?'true':'false')});
   document.addEventListener('click',function(e){if(!nav.contains(e.target)){nav.classList.remove('open');tog.setAttribute('aria-expanded','false')}});
   function setCur(i){links.forEach(function(a,j){a.setAttribute('aria-current',j===i?'true':'false')});cur.textContent=i>=0?links[i].textContent.replace(/^\d+/,''):'მენიუ'}
@@ -1138,11 +1140,11 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
   function crsA(k){var c=CRS[k];return '<a class="crs" href="'+CB+c[1]+UT+'" target="_blank" rel="noopener"><span>SMART Academy'+(c[2]?' · '+c[2]:'')+'</span><b>'+c[0]+'</b><i>კურსის ნახვა →</i></a>'}
   function crsL(k){if(XLG.indexOf(k)>=0)return '<span class="crsx"><em>SMART Academy-ს Excel კურსები, აირჩიე შენთვის შესაფერისი:</em>'+XLG.map(function(j){return '<a class="crsl" href="'+CB+CRS[j][1]+UT+'" target="_blank" rel="noopener">'+CRS[j][0]+' · '+CRS[j][2]+' →</a>'}).join('')+'</span>';return '<a class="crsl" href="'+CB+CRS[k][1]+UT+'" target="_blank" rel="noopener">SMART Academy-ს კურსი: '+CRS[k][0]+' →</a>'}
   function res(){
-    if(gi<0&&!Object.keys(lv).length){$('mres').innerHTML='<div class="mh"><div><span class="small">შენი შედეგი</span><h3>მონიშნე ენები და პროგრამები, რომლებსაც ფლობ</h3></div></div><p class="mline">ამის შემდეგ აქ გამოჩნდება, რამდენი ღია ვაკანსია ითხოვს სწორედ შენს უნარებს. ან აირჩიე პოზიცია.</p>';return}
+    if(gi<0&&!Object.keys(lv).length){$('mres').innerHTML='<div class="mh"><div><span class="small">შენი შედეგი</span><h3>მონიშნე ენები და პროგრამები, რომლებსაც ფლობ</h3></div></div><p class="mline">ამის შემდეგ აქ გამოჩნდება, რამდენი ღია ვაკანსია ითხოვს სწორედ შენს უნარებს. ან აირჩიე პოზიცია.</p><h4>SMART Academy-ს Excel კურსები</h4><p class="mline">გადახედე და აირჩიე, რომელი გჭირდება.</p><div class="crsg">'+XLG.map(crsA).join('')+'</div>';return}
     if(gi<0){var AA=active(MD.g.map(function(_,i){return i}),true);
       $('mres').innerHTML='<div class="mh"><div><span class="small">შენი შედეგი</span><h3>'+f(AA.length)+' ღია ვაკანსია ითხოვს სწორედ იმ ენებსა და პროგრამებს, რომლებსაც ფლობ</h3></div></div>'+
         '<div class="vbox">'+(showList?listHtml(AA):'<button type="button" class="vgo">ნახე ვაკანსიები</button>')+'</div>'+
-        '<p class="mline">აირჩიე პოზიცია და ნახე, რას ითხოვენ მასზე და რა ისწავლო, რომ მეტი ვაკანსია გაგეხსნას.</p>';return}
+        '<p class="mline">აირჩიე პოზიცია და ნახე, რას ითხოვენ მასზე და რა ისწავლო, რომ მეტი ვაკანსია გაგეხსნას.</p>'+(lv.xls>0?'':'<h4>Excel-ს ჯერ არ ფლობ? SMART Academy-ს Excel კურსები</h4><p class="mline">გადახედე და აირჩიე, რომელი გჭირდება.</p><div class="crsg">'+XLG.map(crsA).join('')+'</div>');return}
     var g=MD.g[gi],V=g.v,N=V.length,name=SN[g.f+'|'+g.s]||g.s;
     var fit=0,expOnly=0,none=0,need={},lvq={};
     V.forEach(function(v){var s=ok(v,lv),x=v[1]<=exp;if(!v[0].length)none++;
@@ -1176,15 +1178,15 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
         var q=lvq[k],ql=0,qn=0;if(q)for(var l in q)if(q[l]>qn){qn=q[l];ql=+l}
         var reqTxt=ql&&qn>=3?'ხშირად '+LVN[ql]+' დონე':'',have=lv[k]|0,okL=have&&(!ql||qn<3||have>=ql),p=Math.round(need[k]/N*100);
         var mine=have?'შენ: '+lvName(k,have):'არ გაქვს';
-        return '<div class="rr'+(okL?' has':have?' part':'')+'"><span class="rk">'+(okL?'✓':have?'!':'✗')+'</span><span class="rn">'+SKN[k][0]+'<small>'+mine+(reqTxt?' · ითხოვენ '+reqTxt:'')+'</small></span><span class="rt"><i style="width:'+p+'%"></i></span><b>'+p+'%</b></div>'}).join(''):'<p class="mok">ამ პოზიციის ვაკანსიები ენას ან პროგრამას იშვიათად ითხოვს.</p>')+'</div>';
+        return '<div class="rr'+(okL?' has':have?' part':'')+'"><span class="rk">'+(okL?'✓':have?'!':'✗')+'</span><span class="rn">'+SKN[k][0]+'<small>'+mine+(reqTxt?' · ითხოვენ '+reqTxt:'')+(k==='xls'&&!okL?' · <a class="xjump" href="#xcrs">Excel-ის კურსები ↓</a>':'')+'</small></span><span class="rt"><i style="width:'+p+'%"></i></span><b>'+p+'%</b></div>'}).join(''):'<p class="mok">ამ პოზიციის ვაკანსიები ენას ან პროგრამას იშვიათად ითხოვს.</p>')+'</div>';
     if(plan.length){h+='<h4>რა ისწავლო, რომ მეტი ვაკანსია გაგეხსნას</h4>'+plan.map(function(x,i){var s=SKN[x[0]],up=x[3]>0;
         var what=up?'აიმაღლე '+lvName(x[0],x[3])+' → '+lvName(x[0],x[1]):(isL(x[0])&&x[1]>1?'ისწავლე '+LVN[x[1]]+' დონემდე':'ისწავლე');
         return '<div class="mi must k1"><div><span class="rank">'+(i+1)+'</span><b>'+s[0]+'</b><span>'+what+' · გაგიხსნის კიდევ <strong>'+x[2]+'</strong> ვაკანსიას</span>'+(SKC[x[0]]?crsL(SKC[x[0]]):'')+'</div></div>'}).join('')+
       (cur>fit?'<p class="mline">ამის შემდეგ შესაფერისი ვაკანსიები <b>'+f(fit)+'</b>-დან <b>'+f(cur)+'</b>-მდე გაიზრდება.</p>':'')}
     var pc=(POSC[g.f+'|'+g.s]||[]).slice();
     plan.forEach(function(x){var c=SKC[x[0]];if(c&&pc.indexOf(c)<0)pc.push(c)});
-    var hx=pc.some(function(k){return XLG.indexOf(k)>=0});if(hx){pc=pc.filter(function(k){return XLG.indexOf(k)<0}).slice(0,3);pc=XLG.concat(pc)}else pc=pc.slice(0,4);
-    if(pc.length)h+='<h4>გააუმჯობესე უნარი SMART Academy-სთან</h4>'+(hx?'<p class="mline">Excel-ის რამდენიმე კურსია. გადახედე და აირჩიე, რომელი გჭირდება.</p>':'')+'<div class="crsg">'+pc.map(crsA).join('')+'</div>'+'<div class="offer"><span class="ot">შეთავაზება</span><b>სპეციალური შეთავაზება SMART Support-ის კანდიდატებისთვის</b><p>SMART Academy-ს ყველა კურსზე ფასდაკლებით ისარგებლებ. კურსზე რეგისტრაციისას მიუთითე ეს პრომოკოდი.</p><div class="pcode"><label for="pcodeIn">პრომოკოდი</label><input id="pcodeIn" type="text" readonly value="'+(PROMO||'')+'" placeholder="კოდი აქ გამოჩნდება"><button type="button" class="pcopy">დააკოპირე</button></div></div>';
+    var hx=pc.some(function(k){return XLG.indexOf(k)>=0})||(need.xls>0&&!(lv.xls>0));if(hx){pc=pc.filter(function(k){return XLG.indexOf(k)<0}).slice(0,3);pc=XLG.concat(pc)}else pc=pc.slice(0,4);
+    if(pc.length)h+='<h4 id="xcrs">გააუმჯობესე უნარი SMART Academy-სთან</h4>'+(hx?'<p class="mline">Excel-ის რამდენიმე კურსია. გადახედე და აირჩიე, რომელი გჭირდება.</p>':'')+'<div class="crsg">'+pc.map(crsA).join('')+'</div>'+'<div class="offer"><span class="ot">შეთავაზება</span><b>სპეციალური შეთავაზება SMART Support-ის კანდიდატებისთვის</b><p>SMART Academy-ს ყველა კურსზე ფასდაკლებით ისარგებლებ. კურსზე რეგისტრაციისას მიუთითე ეს პრომოკოდი.</p><div class="pcode"><label for="pcodeIn">პრომოკოდი</label><input id="pcodeIn" type="text" readonly value="'+(PROMO||'')+'" placeholder="კოდი აქ გამოჩნდება"><button type="button" class="pcopy">დააკოპირე</button></div></div>';
     if(expOnly)h+='<p class="mexp">'+expOnly+' ვაკანსიაში უნარები გაქვს, მაგრამ მეტ გამოცდილებას ითხოვენ.</p>';
     $('mres').innerHTML=h}
   $('mres').addEventListener('click',function(e){var b=e.target.closest('.pcopy');if(!b)return;var i=$('pcodeIn');if(!i||!i.value)return;

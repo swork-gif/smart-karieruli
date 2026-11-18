@@ -554,6 +554,8 @@ details > summary{font-weight:500}
 .vlist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;background:#ECEBF5;border-radius:12px;padding:10px 12px}
 .vlist li b{font-size:14px;font-weight:900}
 .vlist li span{font-size:12.5px;color:#5E5B78}
+.vlist li > b,.vlist li > span{grid-column:1;min-width:0;overflow-wrap:anywhere}
+.vlist .vsal{white-space:nowrap}
 .vlist li a{grid-row:1/span 2;grid-column:2;font-size:12.5px;font-weight:900;text-decoration:none;color:#3340FF;white-space:nowrap}
 .vlock{position:relative;border-radius:14px;overflow:hidden;background:#ECEBF5;padding:12px;display:grid;gap:6px}
 .vlock i{display:block;height:34px;border-radius:10px;background:#fff;opacity:.7}
@@ -1140,7 +1142,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
     if(gi<0){var AA=active(MD.g.map(function(_,i){return i}),true);
       $('mres').innerHTML='<div class="mh"><div><span class="small">შენი შედეგი</span><h3>'+f(AA.length)+' ღია ვაკანსია ითხოვს სწორედ იმ ენებსა და პროგრამებს, რომლებსაც ფლობ</h3></div></div>'+
         '<div class="vbox">'+(showList?listHtml(AA):'<button type="button" class="vgo">ნახე ვაკანსიები</button>')+'</div>'+
-        '<p class="mline">აირჩიე პოზიცია და ნახე, რას ითხოვენ მასზე და რა ისწავლო, რომ მეტი ვაკანსია გაგეხსნას.</p>'+(lv.xls>0?'':'<h4>Excel-ს ჯერ არ ფლობ? SMART Academy-ს Excel კურსები</h4><p class="mline">გადახედე და აირჩიე, რომელი გჭირდება.</p><div class="crsg">'+XLG.map(crsA).join('')+'</div>');return}
+        '<p class="mline">აირჩიე პოზიცია და ნახე, რას ითხოვენ მასზე და რა ისწავლო, რომ მეტი ვაკანსია გაგეხსნას.</p>'+((lv.xls|0)>=3?'':'<h4>'+(lv.xls>0?'გააღრმავე Excel-ის ცოდნა: SMART Academy-ს კურსები':'Excel-ს ჯერ არ ფლობ? SMART Academy-ს Excel კურსები')+'</h4><p class="mline">გადახედე და აირჩიე, რომელი გჭირდება.</p><div class="crsg">'+XLG.map(crsA).join('')+'</div>');return}
     var g=MD.g[gi],V=g.v,N=V.length,name=SN[g.f+'|'+g.s]||g.s;
     var fit=0,expOnly=0,none=0,need={},lvq={};
     V.forEach(function(v){var s=ok(v,lv),x=v[1]<=exp;if(!v[0].length)none++;
@@ -1181,7 +1183,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
       (cur>fit?'<p class="mline">ამის შემდეგ შესაფერისი ვაკანსიები <b>'+f(fit)+'</b>-დან <b>'+f(cur)+'</b>-მდე გაიზრდება.</p>':'')}
     var pc=(POSC[g.f+'|'+g.s]||[]).slice();
     plan.forEach(function(x){var c=SKC[x[0]];if(c&&pc.indexOf(c)<0)pc.push(c)});
-    var hx=pc.some(function(k){return XLG.indexOf(k)>=0})||(need.xls>0&&!(lv.xls>0));if(hx){pc=pc.filter(function(k){return XLG.indexOf(k)<0}).slice(0,3);pc=XLG.concat(pc)}else pc=pc.slice(0,4);
+    var hx=pc.some(function(k){return XLG.indexOf(k)>=0})||(need.xls>0&&(lv.xls|0)<3);if(hx){pc=pc.filter(function(k){return XLG.indexOf(k)<0}).slice(0,3);pc=XLG.concat(pc)}else pc=pc.slice(0,4);
     if(pc.length)h+='<h4 id="xcrs">გააუმჯობესე უნარი SMART Academy-სთან</h4>'+(hx?'<p class="mline">Excel-ის რამდენიმე კურსია. გადახედე და აირჩიე, რომელი გჭირდება.</p>':'')+'<div class="crsg">'+pc.map(crsA).join('')+'</div>'+'<div class="offer"><span class="ot">შეთავაზება</span><b>სპეციალური შეთავაზება SMART Support-ის კანდიდატებისთვის</b><p>SMART Academy-ს ყველა კურსზე ფასდაკლებით ისარგებლებ. კურსზე რეგისტრაციისას მიუთითე ეს პრომოკოდი.</p><div class="pcode"><label for="pcodeIn">პრომოკოდი</label><input id="pcodeIn" type="text" readonly value="'+(PROMO||'')+'" placeholder="კოდი აქ გამოჩნდება"><button type="button" class="pcopy">დააკოპირე</button></div></div>';
     if(expOnly)h+='<p class="mexp">'+expOnly+' ვაკანსიაში უნარები გაქვს, მაგრამ მეტ გამოცდილებას ითხოვენ.</p>';
     $('mres').innerHTML=h}

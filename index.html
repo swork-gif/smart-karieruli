@@ -789,12 +789,12 @@ details > summary{font-weight:500}
   .k-lay{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:start}
   .k-side{position:relative;align-self:stretch}
   .k-nav{position:sticky;top:16px}
-  .k-lay.k-fr .k-nav{position:absolute;left:0;right:0;top:0;transition:transform .18s ease-out}
+  .k-lay.k-fr .k-nav{position:absolute;left:0;right:0;top:0;will-change:transform}
 }
 @media (max-width:1099px){
   .k-side{position:absolute;inset:0;pointer-events:none;z-index:30}
   .k-nav{position:sticky;top:10px;pointer-events:auto;padding:4px 6px;border-radius:14px;margin:0 auto;max-width:520px;background:var(--surface);border:1px solid var(--line)}
-  .k-lay.k-fr .k-nav{position:absolute;left:0;right:0;top:0;transition:transform .18s ease-out}
+  .k-lay.k-fr .k-nav{position:absolute;left:0;right:0;top:0;will-change:transform}
   .k-lay > .grid{padding-top:62px}
   .sh,.k-book{scroll-margin-top:76px}
   .k-nh{display:none}
@@ -979,7 +979,7 @@ details > summary{font-weight:500}
   function build(){mk.forEach(function(m){m.remove()});mk=[];vis={};
     var H=lay.offsetHeight,n=Math.ceil(H/STEP);
     for(var i=0;i<n;i++){var m=document.createElement('div');m.className='k-mk';m.style.top=(i*STEP)+'px';m.style.height=STEP+'px';m.dataset.i=i;lay.appendChild(m);mk.push(m);io.observe(m)}}
-  var th=[];for(var t=0;t<=20;t++)th.push(t/20);
+  var th=[];for(var t=0;t<=40;t++)th.push(t/40);
   var io=new IntersectionObserver(function(es){es.forEach(function(e){var i=+e.target.dataset.i;
       if(e.isIntersecting&&e.intersectionRatio>0)vis[i]=[e.intersectionRect.top-e.boundingClientRect.top,e.intersectionRect.height];else delete vis[i]});
     var ks=Object.keys(vis).map(Number);if(!ks.length)return;

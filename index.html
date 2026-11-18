@@ -554,7 +554,8 @@ details > summary{font-weight:500}
 .vlist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;background:#ECEBF5;border-radius:12px;padding:10px 12px}
 .vlist li b{font-size:14px;font-weight:900}
 .vlist li span{font-size:12.5px;color:#5E5B78}
-.vlist li > b,.vlist li > span{grid-column:1;min-width:0;overflow-wrap:anywhere}
+.vlist li > b,.vlist li > span{grid-column:1;min-width:0;overflow-wrap:break-word}
+@media (max-width:620px){#mres .vlist li{grid-template-columns:minmax(0,1fr)}#mres .vlist li a{grid-row:auto;grid-column:1;margin-top:4px}#mres .vlock .vov a{font-size:14px;padding:10px 16px;max-width:100%}}
 .vlist .vsal{white-space:nowrap}
 .vlist li a{grid-row:1/span 2;grid-column:2;font-size:12.5px;font-weight:900;text-decoration:none;color:#3340FF;white-space:nowrap}
 .vlock{position:relative;border-radius:14px;overflow:hidden;background:#ECEBF5;padding:12px;display:grid;gap:6px}
@@ -791,12 +792,12 @@ details > summary{font-weight:500}
   .k-lay{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:start}
   .k-side{position:relative;align-self:stretch}
   .k-nav{position:sticky;top:16px}
-  .k-lay.k-fr .k-nav{position:absolute;left:0;right:0;top:0;will-change:transform}
+  .k-lay.k-inframe .k-nav{position:absolute;left:0;right:0;top:0;will-change:transform}
 }
 @media (max-width:1099px){
   .k-side{position:absolute;inset:0;pointer-events:none;z-index:30}
   .k-nav{position:sticky;top:10px;pointer-events:auto;padding:4px 6px;border-radius:14px;margin:0 auto;max-width:520px;background:var(--surface);border:1px solid var(--line)}
-  .k-lay.k-fr .k-nav{position:absolute;left:0;right:0;top:0;will-change:transform}
+  .k-lay.k-inframe .k-nav{position:absolute;left:0;right:0;top:0;will-change:transform}
   .k-lay > .grid{padding-top:62px}
   .sh,.k-book{scroll-margin-top:76px}
   .k-nh{display:none}
@@ -994,7 +995,7 @@ details > summary{font-weight:500}
   function pick(){var line=(inFrame?vTop:window.pageYOffset-lay.getBoundingClientRect().top-window.pageYOffset+window.pageYOffset)+vH*0.3,best=-1;
     if(!inFrame)line=-lay.getBoundingClientRect().top+window.innerHeight*0.3;
     secs.forEach(function(s,i){if(s&&s.offsetParent!==null){var y=s.getBoundingClientRect().top-lay.getBoundingClientRect().top;if(y<=line)best=i}});setCur(best)}
-  if(inFrame){lay.classList.add('k-fr');build();var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){build();place()},200)});
+  if(inFrame){lay.classList.add('k-inframe');build();var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){build();place()},200)});
     if('ResizeObserver' in window){var lh=lay.offsetHeight;new ResizeObserver(function(){if(Math.abs(lay.offsetHeight-lh)>40){lh=lay.offsetHeight;build()}}).observe(lay)}}
   else{addEventListener('scroll',pick,{passive:true});addEventListener('resize',pick)}
   setCur(-1);pick();
@@ -1117,7 +1118,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
   function listHtml(LIST){var h='';
     if(!LIST.length)return '<p style="font-size:13.5px">ახლა შესაფერისი ღია ვაკანსია არ არის. მონიშნე მეტი უნარი.</p>';
     h+=salNote(LIST)+'<ul class="vlist">'+LIST.slice(0,3).map(function(v){var u=url(v[6]);return '<li><b>'+esc(MD.tt[v[2]])+'</b><span>'+esc(MD.co[v[3]])+(MD.ci[v[4]]?' · '+esc(MD.ci[v[4]]):'')+(v[5]?' · ვადა '+dl(v[5]):'')+(v[7]?' · <b class="vsal">'+sal(v)+'</b>':'')+'</span>'+(u?'<a href="'+u+'" target="_blank" rel="noopener">ვაკანსიის ნახვა</a>':'')+'</li>'}).join('')+'</ul>';
-    if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="#reg" data-ksvc="vac">გახსენი სრული სია · 29 ₾</a></div></div>';
+    if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="#reg" data-ksvc="vac">გახსენი სრული სია · <span style="white-space:nowrap">29 ₾</span></a></div></div>';
     return h}
   var CB='https://smartacademy.ge/trainings/',UT='?utm_source=career&utm_medium=matcher',PROMO='';
   var CRS={xbs:['MS Excel-ის საბაზისო კურსი','226-MS-EXCEL','საბაზისო'],xls:['MS Excel: საბაზისოდან მონაცემთა ანალიზამდე','342-MICROSOFT-EXCEL','საბაზისოდან ანალიზამდე'],xla:['MS Excel მონაცემთა ანალიზისთვის','331-MS-Excel-%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%AA%E1%83%94%E1%83%9B%E1%83%97%E1%83%90-%E1%83%90%E1%83%9C%E1%83%90%E1%83%9A%E1%83%98%E1%83%96%E1%83%98%E1%83%A1%E1%83%97%E1%83%95%E1%83%98%E1%83%A1','მონაცემთა ანალიზი'],off:['საოფისე პროგრამების საფუძვლები','192-Microsoft-Office-Programs-Word-PowerPoint-Excel','Word, PowerPoint, Excel'],
@@ -1168,7 +1169,7 @@ var MD={"sk":["eng","rus","ger","fre","ita","tur","chi","spa","off","xls","crm",
       if(!LIST.length)h+='<p style="font-size:13.5px">ახლა შესაფერისი ღია ვაკანსია არ არის. მონიშნე მეტი უნარი ან სხვა პოზიცია.</p>';
       else{
         h+=salNote(LIST)+'<ul class="vlist">'+LIST.slice(0,3).map(function(v){var u=url(v[6]);return '<li><b>'+esc(MD.tt[v[2]])+'</b><span>'+esc(MD.co[v[3]])+(MD.ci[v[4]]?' · '+esc(MD.ci[v[4]]):'')+(v[5]?' · ვადა '+dl(v[5]):'')+(v[7]?' · <b class="vsal">'+sal(v)+'</b>':'')+'</span>'+(u?'<a href="'+u+'" target="_blank" rel="noopener">ვაკანსიის ნახვა</a>':'')+'</li>'}).join('')+'</ul>';
-        if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="#reg" data-ksvc="vac">გახსენი სრული სია · 29 ₾</a></div></div>';
+        if(LIST.length>3)h+='<div class="vlock"><i></i><i></i><i></i><div class="vov"><b>კიდევ '+f(LIST.length-3)+' ვაკანსია</b><a href="#reg" data-ksvc="vac">გახსენი სრული სია · <span style="white-space:nowrap">29 ₾</span></a></div></div>';
       }
     }
     h+='</div>';
